@@ -30,4 +30,4 @@ for file_name in os.listdir(temp_folder):
             except Exception as e:
                 print(f"❌ Error deleting {file_name}: {e}")
 
-print(f"\n🎉 Cleanup complete! {files_deleted} file(s) deleted.")
+print(f"\n🎉 Cleanup complete, Miss Ellie! {files_deleted} file(s) deleted.")
