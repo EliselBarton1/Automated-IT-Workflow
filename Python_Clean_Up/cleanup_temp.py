@@ -1,33 +1,26 @@
 import os
 import time
 
-# Define the folder to clean
-temp_folder = "/Users/ebarton/Documents/Projects/Automated-IT-Workflow/Python_Clean_Up"
+# Define the folder to clean (you can change this path)
+temp_folder = "/home/ebarton/Temp"
 
-# Get current time
+# Get the current time
 now = time.time()
 
-# Check if folder exists
-if not os.path.exists(temp_folder):
-    print(f"Error: Folder '{temp_folder}' does not exist.")
-    exit()
-
 # Loop through files in the folder
-files_deleted = 0
 for file_name in os.listdir(temp_folder):
     file_path = os.path.join(temp_folder, file_name)
 
     # Check if it's a file (not a folder)
     if os.path.isfile(file_path):
+
+        # Get the file's last modified time
         last_modified = os.stat(file_path).st_mtime
 
         # If the file is older than 7 days, delete it
         if now - last_modified > 7 * 24 * 60 * 60:
             try:
+                print(f"Deleting {file_name}...")
                 os.remove(file_path)
-                files_deleted += 1
-                print(f"✅ Deleted: {file_name}")
             except Exception as e:
-                print(f"❌ Error deleting {file_name}: {e}")
-
-print(f"\n🎉 Cleanup complete, Miss Ellie! {files_deleted} file(s) deleted.")
+                print(f"Error deleting {file_name}: {e}")
